@@ -1,0 +1,13 @@
+.header-filter {
+	background-image: url('/static/sportslover/img/sportslover.jpg'); 
+	background-size: cover; 
+	background-position: top center;
+}
+
+.col-md-5 {
+	margin-left:25px;
+}
+
+.align{
+	float:left;
+}

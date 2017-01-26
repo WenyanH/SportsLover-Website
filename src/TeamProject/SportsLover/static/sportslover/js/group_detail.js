@@ -1,0 +1,3 @@
+function cancelGroup() {
+	window.close();
+}

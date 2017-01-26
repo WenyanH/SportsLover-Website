@@ -1,0 +1,188 @@
+{% extends "full_base.html" %}
+{% block title %}SportsLover Place{% endblock %}
+{% block head %}
+    <script src="/static/assets/javascripts/jquery/jquery.js"></script>
+    <link href="/static/sportslover/css/profile.css" rel="stylesheet"/>
+    <script src="/static/sportslover/js/profile.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/static/assets/stylesheets/star.min.css">
+    <link rel="stylesheet" href="/static/sportslover/css/add_comment.css">
+    <script src="/static/sportslover/js/place_item.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+    <body class="profile-body">
+    <nav class="navbar navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" id="sportslover" href="{% url 'search' %}"><h2 id="sportslover-color"><b>SportsLover</b>
+                </h2></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navigation-index">
+                <ul class="nav navbar-nav navbar-right" titles>
+                   <li>
+                        <a href="{% url 'group' %}">
+                            <i class="material-icons">explore</i> All Groups
+                        </a>
+                    </li>
+                    <input id="check_login" value="{{user}}"/>
+                    <li id="login">
+                        <a href="/login/?next={{request.path}}">
+                            <i class="material-icons">account_box</i> Log In
+                        </a>
+                    </li>
+                    <li id="user">
+                        <a href="{% url 'myprofile' %}">
+                            <i class="material-icons">face</i> {{user}}
+                        </a>
+                    </li>
+                    <li id="notification" class="dropdown-open">
+                        <a class="hand" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                           <i class="material-icons">textsms</i>
+                            {% if notifications %}<b class="yellow" id="new1">new</b>
+                            {% else %}<b class="yellow" id="new2">new</b>
+                            {% endif %}
+                            Notifications
+                        </a>
+                        {% if notifications %}
+                         <ul class="dropdown-menu">
+                            {% for notification in notifications %}
+                            {% if notification.types == request %}
+                            <li>
+                                <a class="hand">
+                                    <i class="material-icons">textsms</i>&nbsp{{notification.content}}&nbsp&nbsp&nbsp
+                                    <div id="accept">
+                                    <a href="{% url 'delete_notification_accept_group' notification.id %}">
+                                    <button class="btn-primary">Accept</button>
+                                    </a>
+                 
+                                    <a href="{% url 'delete_notification_decline_group' notification.id %}">
+                                        &nbsp&nbsp<button class="btn-warning">Decline</button>
+                                    </a>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if notification.types == response %}
+                            <li>
+                                <a class="hand"><i class="material-icons">textsms</i>&nbsp{{notification.content}}&nbsp&nbsp&nbsp
+                                <div id="accept">
+                                <a href="{% url 'delete_notification_decline_group' notification.id %}">
+                                    &nbsp&nbsp<button class="btn-warning">OK</button>
+                                </a>
+                                </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    <li class="dropdown-open">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <i class="material-icons">account_box</i>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'setting' %}"><i class="material-icons">settings</i> Settings</a></li>
+                            <li><a href="{% url 'password' %}"><i class="material-icons">lock</i> Change Password</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="/login/?next={{ request.path }}"><i class="material-icons">fast_forward</i>
+                                Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="header header-filter"></div>
+        <div class="main main-raised">
+            <nav class="navbar navbar-primary">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#example-navbar-primary">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand">SportsLover Group</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="example-navbar-primary">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{% url 'search' %}">
+                                    <i class="material-icons">account_balance</i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'place' %}">
+                                    <i class="material-icons">explore</i> All Places
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                        <div class='row-fluid'>
+                            <div class='span12'>
+                                <h3>You Created In Progress Groups</h3>
+                                <div class='box-content box-no-padding'>
+                                    <div class='responsive-table'>
+                                        <div class='scrollable-area'>
+                                            <table class='table'>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-md-4 no-sort">Topics</th>
+                                                        <th>Sports</th>
+                                                        <th class="col-md-3">Place</th>
+                                                        <th>Size</th>
+                                                        <th>Start Date</th>
+                                                        <th>Cost</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="tbody">
+                                                    {% if group_list|length == 0 %}
+                                                    <tr>
+                                                        <td>
+                                                            <span>Current no groups</span>
+                                                        </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% for group in group_list %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="javascript:updateGroupInfo({{group.id}})">
+                                                                <p><b>{{group.subject}}</b></p>
+                                                            </a>
+                                                            <span>by {{group.owner}} </span>
+                                                            <span>&nbsp >> {{group.time|date:"Y-m-d H:i:s"}}</span>
+                                                        </td>
+                                                        <td name="sports">{{group.sportsitem}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                                                        <td>{{group.place}}</td>
+                                                        <td name="size">{{group.size}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                                                        <td name="time">{{group.date_begin|date:"Y-m-d H:i"}}</td>
+                                                        <td>{{group.cost}}$&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>            
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+
+{% endblock %}

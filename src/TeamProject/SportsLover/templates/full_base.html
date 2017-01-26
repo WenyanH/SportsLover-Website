@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<link rel="icon" type="image/png" href="/static/sportslover/img/favicon.png">
+	<title>{% block title %} Title {% endblock %}</title>
+
+	<!-- Fonts and icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" href="/static/material-kit/css/font-awesome.css" />
+	<link rel="stylesheet" href="/static/material-kit/css/font-google.css" />
+
+	<!-- CSS Files -->
+	<link href="/static/sportslover/css/full_base.css" rel="stylesheet"/>
+    <link href="/static/material-kit/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/material-kit/css/material-kit.css" rel="stylesheet"/>
+    <link href="/static/material-kit/css/sportslover.css" rel="stylesheet"/>
+    <link href='/static/assets/stylesheets/light-theme.css' id='color-settings-body-color' media='all' rel='stylesheet' type='text/css' /> 
+    <link href='/static/assets/stylesheets/bootstrap.css' media='all' rel='stylesheet' type='text/css' />
+    <link href='/static/assets/stylesheets/bootstrap-datatable.css' media='all' rel='stylesheet' type='text/css' />   
+    {% block head %}{% endblock %}
+</head>
+
+{% block content %}{% endblock %}
+<div class="contact-info">
+    <p>@Contact Information: Wenyan Hu (wenyanh@andrew.cmu.edu); Bin Zhu (bzhu1@andrew.cmu.edu)</p>
+</div>
+
+</body>
+<script src='/static/assets/javascripts/jquery/jquery.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/jquery_ui/jquery-ui.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/bootstrap/bootstrap.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/datatables/jquery.dataTables.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/datatables/jquery.dataTables.columnFilter.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/common/wysihtml5.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/common/bootstrap-wysihtml5.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/timeago/jquery.timeago.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/autosize/jquery.autosize-min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/charCount/charCount.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/naked_password/naked_password-0.2.4.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/nestable/jquery.nestable.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/tabdrop/bootstrap-tabdrop.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/bootstrap_maxlength/bootstrap-maxlength.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/tables.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/theme.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/bootstrap_colorpicker/bootstrap-colorpicker.min.js' type='text/javascript'></script>
+<script src='/static/assets/javascripts/plugins/modernizr/modernizr.min.js' type='text/javascript'></script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SportsLover Create Group</title>
+  <link href="/static/material-kit/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/static/sportslover/css/create_group.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/static/assets/stylesheets/jquery.datetimepicker.css"/>
+  <script src="/static/assets/javascripts/jquery/jquery.js"></script>
+  <script src="/static/assets/javascripts/jquery/jquery.datetimepicker.full.js"></script>
+  <script src='/static/assets/javascripts/bootstrap/bootstrap.min.js' type='text/javascript'></script>
+</head>
+<body>
+<div class="col-sm-6 col-md-10 set">
+  <div class="panel panel-default"> 
+    <div class="panel-body">
+    {% if form.errors %}
+      {% for field in form %}
+        {% for error in field.errors %}
+          <div class="alert alert-danger">{{field.label}}: {{error|escape}}</div>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">{{error|escape}}</div>
+      {% endfor %}
+    {% endif %}     
+    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="post" action="{% url 'add' %}" >
+    	<div class="header header-primary text-center">
+            <h4>Create Your Group</h4>
+        </div>
+        <div class="form-group"> 
+          <label for="group_subject" class="col-sm-2 control-label"><label for="id_group_subject">Group Subject:</label></label> 
+          <div class="col-sm-9"> 
+            {{form.subject}}
+          </div>
+        </div>
+      
+        <div class="form-group"> 
+          <label for="sports_item" class="col-sm-2 control-label"><label for="id_sports_item">Sports Item:</label></label> 
+          <div class="col-sm-4"> 
+           {{form.sportsitem}}
+          </div>
+          <label for="sports_class" class="col-sm-2 control-label"><label for="id_sports_class">Sports Class:</label></label> 
+          <div class="col-sm-3"> 
+              <div class="dropdown">
+                {{form.sportsclass}}
+                <ul class="dropdown-menu">
+                  <li><a id="Ball" href="javascript:selectBall()">Ball Sports</a></li>
+                  <li><a id="Sky" href="javascript:selectSky()">Sky Sports</a></li>
+                  <li><a id="Mountain" href="javascript:selectMountain()">Mountain Sports</a></li>
+                  <li><a id="Water" href="javascript:selectWater()">Water Sports</a></li>
+                  <li><a id="Motor" href="javascript:selectMotor()">Motor Sports</a></li>
+                  <li><a id="Ice" href="javascript:selectIce()">Ice Sports</a></li>
+                  <li><a id="Wild" href="javascript:selectWild()">Wild Sports</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+        <div class="form-group"> 
+          <label for="place" class="col-sm-2 control-label"><label for="id_place">Place:</label></label> 
+          <div class="col-sm-9"> 
+            {{form.place}}
+          </div>
+        </div>
+      
+        <div class="form-group"> 
+          <label for="address" class="col-sm-2 control-label"><label for="id_address">Address:</label></label> 
+          <div class="col-sm-9"> 
+            {{form.address}}
+          </div>
+        </div>
+      
+        <div class="form-group"> 
+	        <label for="cost" class="col-sm-2 control-label"><label for="id_cost">Cost:</label></label>
+	        <div class="col-sm-4"> 
+	           {{form.cost}}
+	        </div>
+	        	<label for="size" class="col-sm-1 control-label"><label for="id_size">Size:</label></label> 
+	         <div class="col-sm-4"> 
+	           {{form.size}}
+	         </div>
+    	</div>
+      <div class="form-group"> 
+          <label for="start_time" class="col-sm-2 control-label"><label for="id_start_time">Start:</label></label> 
+          <div class="col-sm-4"> 
+             {{form.date_begin}}
+          </div>
+            <label for="end_time" class="col-sm-1 control-label"><label for="id_end_time">End:</label></label> 
+           <div class="col-sm-4"> 
+              {{form.date_end}}
+           </div>
+      </div>
+      <div class="form-group"> 
+          <label for="introduction" class="col-sm-2 control-label">Introduction:</label>
+          <div class="col-sm-9"> 
+            {{form.introduction}}
+          </div>
+      </div>
+      <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-9" > 
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button class="btn btn-warning" id="cancel" onclick="cancelGroup()">Cancel</button> 
+        </div> 
+      </div> 
+      {% csrf_token %}
+    </form>
+</div>
+</div>
+</div>
+    <script src="/static/sportslover/js/create_group.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SportsLover Group Detail</title>
+  <link href="/static/material-kit/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/static/sportslover/css/create_group.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/static/assets/stylesheets/jquery.datetimepicker.css"/>
+  <script src="/static/assets/javascripts/jquery/jquery.js"></script>
+  <script src="/static/assets/javascripts/jquery/jquery.datetimepicker.full.js"></script>
+</head>
+<body>
+<div class="col-sm-6 col-md-10 set">
+  <div class="panel panel-default"> 
+    <div class="panel-body">       
+    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="post" action="{% url 'update_confirmation' group.id %}">
+    	<div class="header header-primary text-center">
+            <h4>Group Detail</h4>
+        </div>
+        <div class="form-group"> 
+          <label for="group_subject" class="col-sm-2 control-label"><label for="id_group_subject" >Group Subject:</label></label> 
+          <div class="col-sm-9"> 
+            <input class="form-control" id="id_group_subject" maxlength="200" name="group_subject" type="text" value="{{group.subject}}" readonly/>
+          </div>
+        </div>
+      
+        <div class="form-group"> 
+          <label for="sports_item" class="col-sm-2 control-label"><label for="id_sports_item">Sports Item:</label></label> 
+          <div class="col-sm-4"> 
+            <input class="form-control" id="id_sports_item" maxlength="20" name="sports_item" type="text" value="{{group.sportsitem}}" readonly/>
+          </div>
+          <label for="sports_class" class="col-sm-2 control-label"><label for="id_sports_class">Sports Class:</label></label> 
+          <div class="col-sm-3"> 
+            <input class="form-control" id="id_sports_class" maxlength="20" name="sports_class" type="text" value="{{group.sportsclass}}"  readonly/>
+          </div>
+        </div>
+
+         <div class="form-group"> 
+          <label for="place" class="col-sm-2 control-label"><label for="id_place">Place:</label></label> 
+          <div class="col-sm-9"> 
+            <input class="form-control" id="id_place" maxlength="20" name="place" type="text" value="{{group.place}}" readonly/>
+          </div>
+        </div>
+
+        <div class="form-group"> 
+          <label for="address" class="col-sm-2 control-label"><label for="id_address">Address:</label></label> 
+          <div class="col-sm-9"> 
+            <textarea class="form-control" cols="40" maxlength="100" name="address" rows="2" readonly>{{group.address}}</textarea>
+          </div>
+        </div>
+      
+        <div class="form-group"> 
+	        <label for="cost" class="col-sm-2 control-label"><label for="id_cost">Cost:</label></label>
+	        <div class="col-sm-4"> 
+	           <input class="form-control" id="id_cost" maxlength="20" name="cost" type="text" value="{{group.cost}}$" />
+	        </div>
+	        	<label for="size" class="col-sm-1 control-label"><label for="id_size">Size:</label></label> 
+	         <div class="col-sm-4"> 
+	            <input class="form-control" id="id_size" maxlength="20" name="size" type="text" value="{{group.size}} People" />
+	         </div>
+    	</div>
+      <div class="form-group"> 
+          <label for="start_time" class="col-sm-2 control-label"><label for="id_start_time">Start:</label></label> 
+          <div class="col-sm-4"> 
+             <input class="form-control datetimepicker" id="datetimepicker1" maxlength="20" name="start_time" type="text" value="{{group.date_begin|date:"Y/m/d H:i"}}" />
+          </div>
+            <label for="end_time" class="col-sm-1 control-label"><label for="id_end_time">End:</label></label> 
+           <div class="col-sm-4"> 
+              <input class="form-control datetimepicker" id="datetimepicker2" maxlength="20" name="end_time" type="text" value="{{group.date_end|date:"Y/m/d H:i"}}" />
+           </div>
+      </div>
+      <div class="form-group"> 
+          <label for="introduction" class="col-sm-2 control-label"><label for="id_introduction">Introduction:</label></label> 
+          <div class="col-sm-9"> 
+            <textarea class="form-control" id="id_introduction" maxlength="420" rows="2"  type="text" readonly>{{group.introduction}}</textarea>
+          </div>
+      </div>
+      <input type="text" class="hide" id="notification" name="notification" value="{{user}} send you a request to join group: {{group.subject}}" />
+      <input type="text" class="hide" id="reciever" name="reciever" value="{{group.owner}}" />
+      <input type="text" class="hide" id="groupid" name="groupid" value="{{group.id}}" />
+      <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-9" > 
+          <button class="btn btn-primary">Update</button> 
+        </div> 
+      </div> 
+      {% csrf_token %}
+    </form>
+</div>
+</div>
+</div>
+  <script type="text/javascript">
+  $('.datetimepicker').datetimepicker();
+  </script>
+ <script src="/static/sportslover/js/group_detail.js" type="text/javascript"></script>
+</body>
+</html>

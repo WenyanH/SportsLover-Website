@@ -1,0 +1,7 @@
+{
+	"max-time":"{{max_time|date:"c"}}", 
+	"chats":[{% for chat in chats %}{%spaceless%}{% include 'chat.json' %}{%endspaceless%}{% if not forloop.last %}, {% endif %}{% endfor %}],
+	"user": "{{user}}",
+	"members":"{% for member in members %}{{member.username}}{% if not forloop.last %},{% endif %}{% endfor %}",
+	"friends":"{% for friend in friends %}{{friend.username}}{% if not forloop.last %},{% endif %}{% endfor %}"
+}

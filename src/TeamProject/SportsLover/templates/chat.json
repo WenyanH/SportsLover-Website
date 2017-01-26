@@ -1,0 +1,6 @@
+{
+	"id":{{chat.id}}, 
+	"deleted":{{chat.deleted|lower}}, 
+	"html":"{{chat.html|safe}}", 
+	"sender":"{{chat.sender.username}}"
+}

@@ -1,0 +1,109 @@
+.profile-body {
+	background-color:#c0c0c0;
+}
+
+#sportslover {
+	margin-top: -25px;
+}
+
+#sportslover-color {
+	color:white;
+}
+
+.titles {
+	margin-right:-40px;
+}
+
+.search {
+	background: rgba(255,255,255, 0.8);
+	margin-top:10px; 
+	display:none;
+}
+
+.header-filter {
+	background-image:url('/static/sportslover/img/sportslover.jpg');
+	height:20%;
+}
+
+.main-raised {
+	margin-top:-150px;
+}
+
+.bio {
+	float:left; 
+	width: 300px;
+}
+
+#img {
+	margin-left:5px;
+}
+
+#check_login {
+	display:none;
+}
+
+#current {
+	float:left; 
+	margin-top:-10px; 
+	width:70%;
+	margin-left:10px;
+}
+
+.post-info {
+	float:left; 
+	font-size:80%;
+	margin-top:-10px;
+}
+
+#past {
+	float:left; 
+	width:100%; 
+	margin-top:-20px;
+}
+
+.tfoot-search {
+	font-weight: normal;
+}
+
+.text-center {
+	margin-top:-5px;
+}
+
+#lastone {
+	margin-bottom: -5px;
+}
+
+.photo{
+  height:240px;
+  width:240px;
+}
+
+.yellow {
+	color:yellow;
+}
+
+#accept {
+	float:right; 
+	margin-right:20px;
+}
+
+.hand {
+	cursor:pointer;
+}
+
+#new1 {
+	display:inline;
+}
+
+#new2 {
+	display:none;
+}
+
+#place {
+	width:70%;
+	margin-left:10px;
+}
+
+#check_login {
+	display:none;
+}

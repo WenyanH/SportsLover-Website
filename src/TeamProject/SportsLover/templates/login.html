@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}SportsLover Sign In{% endblock %}
+{% block head %}
+<link href="/static/sportslover/css/login.css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<body class="signup-page">
+    <nav class="navbar navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand"><h4><b>SportsLover</b></h4></a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="header header-filter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                        <div class="card card-signup">
+                            <form class="form" action="{% url 'login' %}" method="post">
+                                <div class="header header-primary text-center">
+                                    <h4>Log In</h4>
+                                </div>
+                                <div class="content">
+                                    {% if form.errors %}
+                                      {% for field in form %}
+                                        {% for error in field.errors %}
+                                          <div class="alert alert-danger">{{field.label}}: {{error|escape}}</div>
+                                        {% endfor %}
+                                      {% endfor %}
+                                      {% for error in form.non_field_errors %}
+                                          <div class="alert alert-danger">{{error|escape}}</div>
+                                      {% endfor %}
+                                    {% endif %}
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+										<input type="username" id="username" name=username class="form-control" placeholder="UserName...">
+									</div>
+
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">lock_outline</i>
+										</span>
+										<input type="password" id="password" name=password placeholder="Password..." class="form-control" />
+									</div>
+                                </div>
+                                <div class="">
+                                <a href="{% url 'registration' %}" class="btn btn-primary col-md-5 align">New User?</a>
+                                </div>
+                                <div class="footer text-center">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-simple btn-primary btn-lg" value="Log In">
+                                    <input class="form-control" type="hidden" name="next" value="{{ next }}"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

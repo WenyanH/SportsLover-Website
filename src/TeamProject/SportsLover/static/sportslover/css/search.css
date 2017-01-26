@@ -1,0 +1,137 @@
+.titles {
+	margin-right:-80px;
+}
+
+.headline {
+	margin-top:-10px;
+}
+
+.header-filter {
+	background-image:url('/static/sportslover/img/sportslover.jpg');
+	background-size:cover; 
+	background-position: center;
+}
+
+.search-box {
+	width: 100%;
+	background: rgba(255,255,255, 0.5); 
+	margin-top:150px;
+}
+
+.middle {
+	margin-left:20px;
+}
+
+.nav-in-search {
+	color:black;
+}
+
+.main-search {
+	margin-bottom:80px;
+}
+
+#search-specific-group {
+	margin-left:20px; 
+	color:purple;
+}
+
+#sports-input {
+	margin-left:10px;
+}
+
+.input-item {
+	color:black; 
+	font-size:120%;
+}
+
+.hidden-dropdown {
+	margin-top:-3px;
+}
+
+.hidden-dropdown-div {
+	display:none;
+}
+
+#check_login {
+	display:none;
+}
+
+#searchform {
+	display:none;
+} 
+
+#new {
+	color:yellow;
+}
+
+.hand {
+	cursor:pointer;
+}
+
+#accept{
+	float:right; 
+	margin-right:20px;
+}
+
+#new1 {
+	display:inline;
+}
+
+#new2 {
+	display:none;
+}
+
+.yellow {
+	color:yellow;
+}
+
+#map {
+    height: 400px;
+    width: 98%;
+}
+
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#target {
+	width: 345px;
+}

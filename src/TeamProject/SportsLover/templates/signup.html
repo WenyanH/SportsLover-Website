@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}SportsLover Sign Up{% endblock %}
+{% block head %}
+<link href="/static/sportslover/css/login.css" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<body class="signup-page">
+    <nav class="navbar navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand"><h4><b>SportsLover</b></h4></a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="header header-filter">
+        {% for field in form.visible_fields %}
+          {% if field.erros %}
+            <div class="alert alert-danger"><h4>{{field.errors}}</h4></div>
+          {% endif %}
+        {% endfor %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                        <div class="card card-signup">
+                            <form class="form" action="{% url 'registration' %}" method="post">
+                                <div class="header header-primary text-center">
+                                    <h4>Sign Up</h4>
+                                </div>
+
+                                <div class="content">
+                                    {% if form.errors %}
+                                      {% for field in form %}
+                                        {% for error in field.errors %}
+                                          <div class="alert alert-danger">{{field.label}}: {{error|escape}}</div>
+                                        {% endfor %}
+                                      {% endfor %}
+                                      {% for error in form.non_field_errors %}
+                                          <div class="alert alert-danger">{{error|escape}}</div>
+                                      {% endfor %}
+                                    {% endif %}    
+                                    
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+                                        {{ form.username }}
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">email</i>
+										</span>
+                                        {{ form.email }}
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+                                        {{ form.first_name }}
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+                                        {{ form.last_name }}
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">lock_outline</i>
+										</span>
+                                        {{ form.password1 }}
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">lock_outline</i>
+										</span>
+                                        {{ form.password2 }}
+                                    </div>
+
+                                    <!-- If you want to add a checkbox to this form, uncomment this code
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="optionsCheckboxes" checked>
+                                            Subscribe to newsletter
+                                        </label>
+                                    </div> -->
+                                </div>
+                                <div class="footer text-center">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-simple btn-primary btn-lg" value="Sign Up">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends "full_base.html" %}
+{% block title %}SportsLover Place{% endblock %}
+{% block head %}
+    <script src="/static/assets/javascripts/jquery/jquery.js"></script>
+    <link href="/static/sportslover/css/profile.css" rel="stylesheet"/>
+    <script src="/static/sportslover/js/profile.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/static/assets/stylesheets/star.min.css">
+    <link rel="stylesheet" href="/static/sportslover/css/add_comment.css">
+    <link rel="stylesheet" href="/static/sportslover/css/place_item.css">
+    <script src="/static/sportslover/js/place_item.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+    <body class="profile-body">
+    <nav class="navbar navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" id="sportslover" href="{% url 'search' %}"><h2 id="sportslover-color"><b>SportsLover</b>
+                </h2></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navigation-index">
+                <ul class="nav navbar-nav navbar-right" titles>
+                   <li>
+                        <a href="{% url 'place' %}">
+                            <i class="material-icons">explore</i> All Places
+                        </a>
+                    </li>
+                    <input id="check_login" value="{{user}}"/>
+                    <li id="login">
+                        <a href="/login/?next={{request.path}}">
+                            <i class="material-icons">account_box</i> Log In
+                        </a>
+                    </li>
+                    <li id="user">
+                        <a href="{% url 'myprofile' %}">
+                            <i class="material-icons">face</i> {{user}}
+                        </a>
+                    </li>
+                    <li id="notification" class="dropdown-open">
+                        <a class="hand" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                           <i class="material-icons">textsms</i>
+                            {% if notifications %}<b class="yellow" id="new1">new</b>
+                            {% else %}<b class="yellow" id="new2">new</b>
+                            {% endif %}
+                            Notifications
+                        </a>
+                        {% if notifications %}
+                         <ul class="dropdown-menu">
+                            {% for notification in notifications %}
+                            {% if notification.types == request %}
+                            <li>
+                                <a class="hand">
+                                    <i class="material-icons">textsms</i>&nbsp{{notification.content}}&nbsp&nbsp&nbsp
+                                    <div id="accept">
+                                    <a href="{% url 'delete_notification_accept_group' notification.id %}">
+                                    <button class="btn-primary">Accept</button>
+                                    </a>
+                 
+                                    <a href="{% url 'delete_notification_decline_group' notification.id %}">
+                                        &nbsp&nbsp<button class="btn-warning">Decline</button>
+                                    </a>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if notification.types == response %}
+                            <li>
+                                <a class="hand"><i class="material-icons">textsms</i>&nbsp{{notification.content}}&nbsp&nbsp&nbsp
+                                <div id="accept">
+                                <a href="{% url 'delete_notification_decline_group' notification.id %}">
+                                    &nbsp&nbsp<button class="btn-warning">OK</button>
+                                </a>
+                                </div>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    <li class="dropdown-open" id="settings">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <i class="material-icons">account_box</i>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'setting' %}"><i class="material-icons">settings</i> Settings</a></li>
+                            <li><a href="{% url 'password' %}"><i class="material-icons">lock</i> Change Password</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="/login/?next={{ request.path }}"><i class="material-icons">fast_forward</i>
+                                Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="header header-filter"></div>
+        <div class="main main-raised">
+            <nav class="navbar navbar-primary">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#example-navbar-primary">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand">SportsLover Place</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="example-navbar-primary">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{% url 'search' %}">
+                                    <i class="material-icons">account_balance</i>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'group' %}">
+                                    <i class="material-icons">explore</i> All Groups
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3" id="place_info">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h4 class="text-center">{{ place.name }}</h4>
+                                    <h5 class="text-center">Address: {{ place.address }}</h5>
+                                    <h5 class="text-center">Average Cost: {{ place.cost }}</h5>
+                                    <h5 class="text-center">
+                                        <input id="rank" value="{{place.rank}}"/>
+                                        Rank: {{ place.rank }}
+                                    </h5>
+                                    <div>
+                                    <p class="text-center">{{footprint}} people have visited this place</p>
+                                    </div>
+                                    <div id="rank_comment">
+                                        <div class="card card-raised card-carousel">
+                                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel slide" data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {% for image in place_image %}
+                                                            {% if image.place == place %}
+                                                                <div class="item" name="placeimage" id="{{image.id}}">
+                                                                    <img src="{% url 'place_photo' image.id %}" class="place_photo">
+                                                                </div>
+                                                             {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                                        <i class="material-icons">keyboard_arrow_left</i>
+                                                    </a>
+                                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                                        <i class="material-icons">keyboard_arrow_right</i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if place_image|length > 0 %}
+                                        <a href="javascript:openOriginal()">See Original Photo</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class='row-fluid'>
+                                <div class='span12'>
+                                    <h3>Most Recent Group Events</h3>
+                                    <div class='box-content box-no-padding'>
+                                        <div class='responsive-table'>
+                                            <div class='scrollable-area'>
+                                                <table class='table'>
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="col-md-4">Topics</th>
+                                                        <th>Sports</th>
+                                                        <th class="col-md-3">Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for group in current_groups %}
+                                                        <tr>
+                                                            <td>
+                                                                <a href="javascript:checkGroup({{ group.id }})">
+                                                                    <p><b>{{ group.subject }}</b></p>
+                                                                </a>
+                                                                <span>by <a href="{% url 'profile' group.owner %}">{{ group.owner }} </a></span>
+                                                                <span>&nbsp >> {{ group.time }}</span>
+                                                            </td>
+                                                            <td>{{ group.sportsitem }}</td>
+                                                            <td>{{ group.status }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class='row-fluid'>
+                        <div class='span12'>
+                            <h3>Comments About The Place</h3>
+                            <div class='box-content box-no-padding'>
+                                <div class='responsive-table'>
+                                    <div class='scrollable-area'>
+                                        <table class='table'>
+                                            <tbody>
+                                            {% if comments|length == 0 %}
+                                            <tr>
+                                                <td>
+                                                    <span>Current no comment</span>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            {% for comment in comments %}
+                                                <tr>
+                                                    <td>
+                                                        <div class="media">
+                                                        <div class="media-left">
+                                                        {% for index in info %}
+                                                            {% if index.user.username == comment.author and index.image %}
+                                                            <img class="media-object" height="25" width="25" src="{% url 'photo' index.id %}">
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <p><b>{{comment.text}}</b></p>
+                                                            <span class="post-info">by <a href="{% url 'profile' comment.author %}">{{comment.author}} </a></span>
+                                                            <span class="post-info">&nbsp >> 
+                                                                {{comment.created_time|date:"Y-m-d H:i:s"}}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+
+{% endblock %}
